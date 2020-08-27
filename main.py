@@ -1,4 +1,5 @@
 import tkinter as tk
+# from mttkinter import mtTkinter as tk
 import time
 import classes 
 import win32api
@@ -7,8 +8,10 @@ from threading import Thread
 def mouseClicked(iLoopLocal,swLocal):
     if (iLoopLocal % 2)== 0:
         swLocal.Start()
+
     else:  
         swLocal.Stop()
+
     iLoopIncrement()
 
 def iLoopIncrement():
@@ -36,17 +39,19 @@ def firstFunction():
         if NewKeyState != CurrentKeyState:  # Button state changed
 
             if NewKeyState < 0:  # KeyState = -127 or -128
-                print('BUTTON PRESSED ---', 'NewKeyState = ', NewKeyState )
-
+                # print('BUTTON PRESSED ---', 'NewKeyState = ', NewKeyState )
+                pass
             else:                # KeyState =1 or 0
-                print('BUTTON RELEASED ---', 'NewKeyState = ', NewKeyState)
+                # print('BUTTON RELEASED ---', 'NewKeyState = ', NewKeyState)
                 mouseClicked(iLoop,sw)
             CurrentKeyState = NewKeyState
             
         time.sleep(0.001)
     
 thread1  = Thread(target = firstFunction)
+# thread1.setDaemon(True)
 thread1.start()
+
 # root.after(1, firstFunction()) 
 
 root.mainloop() #This method will loop forever, waiting for events from the user, until it exits the program

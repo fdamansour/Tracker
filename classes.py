@@ -31,21 +31,25 @@ class StopWatch(tk.Frame):  #Class StopWatch inheriting from the Tkinter class F
         self.timestr.set('%02d:%02d:%02d' % (minutes, seconds, hseconds))
         
         
-    def Start(self):                                                     
+    def Start(self):          
+            
         """ Start the stopwatch, ignore if running. """
         if not self._running:            
             self._start = time.time() - self._elapsedtime
             self._update()
-            self._running = 1        
+            self._running = 1  
+        print (self._running)
     
-    def Stop(self):                                    
+    def Stop(self):    
+         
+        
         """ Stop the stopwatch, ignore if stopped. """
         if self._running:
             self.after_cancel(self._timer)            
             self._elapsedtime = time.time() - self._start    
             self._setTime(self._elapsedtime)
             self._running = 0
-
+        print (self._running)
     def Reset(self):                                  
         """ Reset the stopwatch. """
         self._start = time.time()         
