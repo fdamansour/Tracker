@@ -7,7 +7,6 @@ class StopWatch(tk.Frame):  #Class StopWatch inheriting from the Tkinter class F
         tk.Frame.__init__(self, parent, kw)
         self._start = 0.0        
         self._elapsedtime = 0.0
-        self._running = 0
         self.timestr = tk.StringVar()               
         self.makeWidgets()      
 
@@ -28,30 +27,19 @@ class StopWatch(tk.Frame):  #Class StopWatch inheriting from the Tkinter class F
         minutes = int(elap/60)
         seconds = int(elap - minutes*60.0)
         hseconds = int((elap - minutes*60.0 - seconds)*100)                
-        self.timestr.set('%02d:%02d:%02d' % (minutes, seconds, hseconds))
-        
-        
-    def Start(self):          
-            
-        """ Start the stopwatch, ignore if running. """
-        if not self._running:            
-            self._start = time.time() - self._elapsedtime
-            self._update()
-            self._running = 1  
-        print (self._running)
-    
-    def Stop(self):    
-         
-        
-        """ Stop the stopwatch, ignore if stopped. """
-        if self._running:
-            self.after_cancel(self._timer)            
-            self._elapsedtime = time.time() - self._start    
-            self._setTime(self._elapsedtime)
-            self._running = 0
-        print (self._running)
-    def Reset(self):                                  
-        """ Reset the stopwatch. """
-        self._start = time.time()         
-        self._elapsedtime = 0.0    
+        self.timestr.set('%02d:%02d:%02d' % (minutes, seconds, hseconds)) # convert date and time and datetime objects to its equivalent string
+       
+    def Start(self):                                                              
+        self._start = time.time() - self._elapsedtime
+        self._update()
+    def Stop(self):                                    
+        self.after_cancel(self._timer)            
+        self._elapsedtime = time.time() - self._start    
         self._setTime(self._elapsedtime)
+
+
+    # def Reset(self):                                  
+        # """ Reset the stopwatch. """
+        # self._start = time.time()         
+        # self._elapsedtime = 0.0    
+        # self._setTime(self._elapsedtime)
